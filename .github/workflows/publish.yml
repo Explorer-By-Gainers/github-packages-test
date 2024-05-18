@@ -31,5 +31,4 @@ jobs:
       working-directory: test
       run: ./gradlew publish
       env:
-        USERNAME_GITHUB: ${{ secrets.USERNAME_GITHUB }}
-        TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
