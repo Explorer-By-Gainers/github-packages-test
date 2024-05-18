@@ -48,8 +48,8 @@ publishing {
 			name = "GitHubPackages"
 			url = uri("https://maven.pkg.github.com/orgs/Explorer-By-Gainers/packages")
 			credentials {
-				username = secrets.USERNAME_GITHUB
-				password = secrets.TOKEN_GITHUB
+				username = System.getenv("USERNAME_GITHUB")
+				password = System.getenv("TOKEN_GITHUB")
 			}
 		}
 	}
