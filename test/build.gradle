@@ -27,10 +27,6 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
 publishing {
 	publications {
 		register('mavenJava', MavenPublication) {
@@ -49,4 +45,12 @@ publishing {
 			}
 		}
 	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('publishPackage') {
+	dependsOn('publish')
 }
