@@ -51,6 +51,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-tasks.register('publishPackage') {
-	dependsOn('publish')
+tasks.named('publishPackage') {
+	dependsOn(tasks.named('publish'))
 }
