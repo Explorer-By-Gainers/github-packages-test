@@ -2,12 +2,11 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'java-library'
 	id 'maven-publish'
 }
 
 group = 'com.explorer'
-version = '0.0.2'
+version = '0.0.3'
 
 java {
 	sourceCompatibility = 17
@@ -26,6 +25,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+bootJar {
+	archiveClassifier = 'boot'
 }
 
 publishing {
@@ -50,10 +53,4 @@ publishing {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.explorer.test.TestApplication'
-	}
 }
