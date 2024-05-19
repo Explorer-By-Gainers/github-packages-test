@@ -1,4 +1,4 @@
-package com.explorer.test.controller;
+package com.explorer.test.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
