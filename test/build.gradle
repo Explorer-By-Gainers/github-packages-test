@@ -1,0 +1,71 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5' apply false
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'maven-publish'
+}
+
+group = 'com.explorer'
+version = '0.0.6'
+
+java {
+	sourceCompatibility = 17
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.boot:spring-boot-dependencies:3.2.5'
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.2.5'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.2.5'
+
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	runtimeOnly 'com.h2database:h2:2.1.214'
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.5'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.3'
+}
+
+publishing {
+	publications {
+		register('mavenJava', MavenPublication) {
+			groupId = 'com.explorer'
+			artifactId = 'test'
+			version = project.version
+		}
+	}
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/Explorer-By-Gainers/github-packages-test")
+			credentials {
+				username = System.getenv("USERNAME_GITHUB")
+				password = System.getenv("TOKEN_GITHUB")
+			}
+		}
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('publishPackage') {
+	dependsOn('publish')
+}
+
+tasks.register('buildJar', Jar) {
+	archiveBaseName.set('test')
+	from sourceSets.main.output
+}
+
+tasks.named('build') {
+	dependsOn('buildJar')
+}
