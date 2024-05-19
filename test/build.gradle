@@ -66,4 +66,6 @@ tasks.register('buildJar', Jar) {
 	from sourceSets.main.output
 }
 
-tasks.named('build').dependsOn('buildJar')
+tasks.named('build') {
+	dependsOn('buildJar')
+}
