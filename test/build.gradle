@@ -60,3 +60,10 @@ tasks.named('test') {
 tasks.register('publishPackage') {
 	dependsOn('publish')
 }
+
+tasks.register('buildJar', Jar) {
+	archiveBaseName.set('test')
+	from sourceSets.main.output
+}
+
+tasks.named('build').dependsOn('buildJar')
